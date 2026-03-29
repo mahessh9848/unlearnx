@@ -1,10 +1,8 @@
 // ============================================================
 // What NOT to Learn — Intelligent Career Strategy Engine
 // ============================================================
-
 // ===== Skill Knowledge Base =====
 const SKILL_DATABASE = {
-
     // ----- WEB DEVELOPMENT -----
     "web-dev": {
         avoid: [
@@ -77,7 +75,6 @@ const SKILL_DATABASE = {
             "Don't skip accessibility (a11y) — it's becoming a legal requirement and companies actively hire for it."
         ]
     },
-
     // ----- MOBILE DEVELOPMENT -----
     "mobile-dev": {
         avoid: [
@@ -129,7 +126,6 @@ const SKILL_DATABASE = {
             "Understand app store guidelines and release processes — they're often overlooked but critical."
         ]
     },
-
     // ----- DATA SCIENCE & AI/ML -----
     "data-science": {
         avoid: [
@@ -192,7 +188,6 @@ const SKILL_DATABASE = {
             "Build end-to-end projects, not just Kaggle notebooks. Show you can go from data to deployed solution."
         ]
     },
-
     // ----- CYBERSECURITY -----
     "cybersecurity": {
         avoid: [
@@ -234,7 +229,6 @@ const SKILL_DATABASE = {
             "Network fundamentals are still essential. Don't skip TCP/IP, DNS, and HTTP protocol understanding."
         ]
     },
-
     // ----- DEVOPS & CLOUD -----
     "devops": {
         avoid: [
@@ -287,7 +281,6 @@ const SKILL_DATABASE = {
             "AWS or Azure — pick one cloud to specialize in, then expand."
         ]
     },
-
     // ----- GAME DEVELOPMENT -----
     "game-dev": {
         avoid: [
@@ -329,7 +322,6 @@ const SKILL_DATABASE = {
             "Understand game design patterns — ECS, observer, state machines, object pooling."
         ]
     },
-
     // ----- UI/UX DESIGN -----
     "ui-ux": {
         avoid: [
@@ -381,7 +373,6 @@ const SKILL_DATABASE = {
             "Learn basic front-end (HTML/CSS) — designers who can speak developers' language are more effective and hireable."
         ]
     },
-
     // ----- BLOCKCHAIN & WEB3 -----
     "blockchain": {
         avoid: [
@@ -424,12 +415,10 @@ const SKILL_DATABASE = {
         ]
     }
 };
-
 // ===== Rotating Skills Animation =====
 const rotatingSkills = ["jQuery", "COBOL", "Flash", "Perl", "Visual Basic", "Dreamweaver", "CoffeeScript", "Silverlight"];
 let rotateIndex = 0;
 const rotatingEl = document.getElementById('rotatingSkill');
-
 function rotateSkill() {
     rotateIndex = (rotateIndex + 1) % rotatingSkills.length;
     rotatingEl.style.opacity = '0';
@@ -440,16 +429,13 @@ function rotateSkill() {
         rotatingEl.style.transform = 'translateY(0)';
     }, 300);
 }
-
 rotatingEl.style.transition = 'all 0.3s ease';
 setInterval(rotateSkill, 2000);
-
 // ===== Animated Counters =====
 function animateCounter(el, target) {
     const duration = 2000;
     const start = performance.now();
     const startVal = 0;
-
     function update(now) {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
@@ -460,7 +446,6 @@ function animateCounter(el, target) {
     }
     requestAnimationFrame(update);
 }
-
 // Intersection Observer for stats
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -474,81 +459,63 @@ const statsObserver = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.3 });
-
 const statsBar = document.querySelector('.stats-bar');
 if (statsBar) statsObserver.observe(statsBar);
-
 // ===== Form Handling =====
 const form = document.getElementById('engineForm');
 const analyzeBtn = document.getElementById('analyzeBtn');
 const resultsSection = document.getElementById('results');
 const resultsGrid = document.getElementById('resultsGrid');
 const proTipsDiv = document.getElementById('proTips');
-
 // Scroll to engine on CTA click
 document.getElementById('startBtn').addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('engine').scrollIntoView({ behavior: 'smooth' });
 });
-
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     // Get form values
     const userGoal = document.getElementById('userGoal').value.trim();
     const currentSkills = document.getElementById('currentSkills').value.trim();
     const industry = document.getElementById('industry').value;
     const experience = document.getElementById('experience').value;
-    const timeAvailable = document.getElementById('timeAvailable').value;
     const priority = document.getElementById('priority').value;
-
-    if (!userGoal || !currentSkills || !industry || !experience || !timeAvailable || !priority) {
+    if (!userGoal || !currentSkills || !industry || !experience || !priority) {
         shakeElement(analyzeBtn);
         return;
     }
-
     // Show loading state
     analyzeBtn.classList.add('loading');
     analyzeBtn.disabled = true;
-
     // Simulate analysis time
     await delay(1800);
-
     // Generate results
-    const results = generateAnalysis(industry, currentSkills, experience, timeAvailable, priority, userGoal);
-
+    const results = generateAnalysis(industry, currentSkills, experience, priority, userGoal);
     // Render results
-    renderResults(results, userGoal, industry, timeAvailable);
-
+    renderResults(results, userGoal, industry);
     // Reset button
     analyzeBtn.classList.remove('loading');
     analyzeBtn.disabled = false;
-
     // Show & scroll to results
     resultsSection.style.display = 'block';
     await delay(100);
     resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
-
 // ===== Analysis Engine =====
-function generateAnalysis(industry, currentSkillsStr, experience, timeAvailable, priority, goal) {
+function generateAnalysis(industry, currentSkillsStr, experience, priority, goal) {
     const industryData = SKILL_DATABASE[industry];
     if (!industryData) return { skills: [], tips: [] };
-
     const currentSkills = currentSkillsStr
         .toLowerCase()
         .split(',')
         .map(s => s.trim())
         .filter(Boolean);
-
     let avoidList = [...industryData.avoid];
-
     // Filter: Remove skills the user already knows well (no point warning about them)
     avoidList = avoidList.filter(item => {
         const skillLower = item.skill.toLowerCase();
         return !currentSkills.some(s => skillLower.includes(s) || s.includes(skillLower));
     });
-
     // Prioritize based on experience level
     if (experience === 'beginner' || experience === 'career-switch') {
         // Beginners: Prioritize high-risk and replaced/dead tech
@@ -564,24 +531,14 @@ function generateAnalysis(industry, currentSkillsStr, experience, timeAvailable,
         // Advanced: Show niche traps and diminishing returns
         avoidList.sort((a, b) => b.oppCost - a.oppCost);
     }
-
-    // Time constraints: if limited time, show fewer but higher-impact items  
-    let maxResults = 5;
-    if (timeAvailable === '1' || timeAvailable === '2') {
-        maxResults = 4; // Limited time = focus on top priorities
-    } else if (timeAvailable === 'full') {
-        maxResults = 6;
-    }
-
+    // Time constraints  
+    let maxResults = 4; // Focus on top priorities
     avoidList = avoidList.slice(0, maxResults);
-
     // Calculate time saved estimate
-    const hoursPerSkill = timeAvailable === '1' ? 150 : timeAvailable === '2' ? 200 : 250;
+    const hoursPerSkill = 200;
     const totalTimeSaved = avoidList.length * hoursPerSkill;
-
     // Get relevant tips
     let tips = [...industryData.tips];
-
     // Add priority-specific tip
     if (priority === 'job') {
         tips.unshift("🎯 Since your priority is getting hired, focus on the most in-demand tools and build a strong portfolio immediately.");
@@ -592,7 +549,6 @@ function generateAnalysis(industry, currentSkillsStr, experience, timeAvailable,
     } else if (priority === 'deep') {
         tips.unshift("🧠 For deep expertise, go beyond tutorials. Read source code, contribute to open-source, and build complex systems.");
     }
-
     return {
         skills: avoidList,
         tips: tips,
@@ -600,13 +556,11 @@ function generateAnalysis(industry, currentSkillsStr, experience, timeAvailable,
         industry: industry
     };
 }
-
 // ===== Render Results =====
-function renderResults(results, goal, industry, timeAvailable) {
+function renderResults(results, goal, industry) {
     // Clear previous
     resultsGrid.innerHTML = '';
     proTipsDiv.innerHTML = '';
-
     // Summary
     const industryNames = {
         'web-dev': 'Web Development',
@@ -618,21 +572,17 @@ function renderResults(results, goal, industry, timeAvailable) {
         'ui-ux': 'UI/UX Design',
         'blockchain': 'Blockchain & Web3'
     };
-
     document.getElementById('resultsSummary').textContent =
         `Based on your goal in ${industryNames[industry]}, here's what to avoid — and what to learn instead.`;
-
     // Summary cards
     document.getElementById('avoidCount').textContent = results.skills.length;
     document.getElementById('timeSaved').textContent = results.totalTimeSaved + 'h';
     document.getElementById('altCount').textContent = results.skills.length;
-
     // Render each skill card
     results.skills.forEach((item, idx) => {
         const card = document.createElement('div');
         card.className = 'result-card';
         card.style.animationDelay = `${idx * 0.12}s`;
-
         card.innerHTML = `
             <div class="result-card-header">
                 <div class="result-skill-name">
@@ -688,17 +638,14 @@ function renderResults(results, goal, industry, timeAvailable) {
                 </div>
             </div>
         `;
-
         resultsGrid.appendChild(card);
     });
-
     // Animate meter fills after render
     setTimeout(() => {
         document.querySelectorAll('.meter-fill').forEach(fill => {
             fill.style.width = fill.dataset.width;
         });
     }, 500);
-
     // Pro Tips
     if (results.tips.length > 0) {
         proTipsDiv.innerHTML = `
@@ -716,26 +663,22 @@ function renderResults(results, goal, industry, timeAvailable) {
         `;
     }
 }
-
 // ===== Restart =====
 document.getElementById('restartBtn').addEventListener('click', () => {
     resultsSection.style.display = 'none';
     form.reset();
     document.getElementById('engine').scrollIntoView({ behavior: 'smooth' });
 });
-
 // ===== Utility Functions =====
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 function shakeElement(el) {
     el.style.animation = 'none';
     el.offsetHeight; // trigger reflow
     el.style.animation = 'shake 0.5s ease';
     setTimeout(() => { el.style.animation = ''; }, 500);
 }
-
 // Add shake keyframes
 const shakeStyle = document.createElement('style');
 shakeStyle.textContent = `
@@ -746,22 +689,37 @@ shakeStyle.textContent = `
     }
 `;
 document.head.appendChild(shakeStyle);
-
 // ===== Smooth entrance animations with Intersection Observer =====
-const observeElements = document.querySelectorAll('.engine-form, .stat-item');
+const observeElements = document.querySelectorAll('.reveal');
 const entranceObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('visible');
             entranceObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1 });
-
+}, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
 observeElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
     entranceObserver.observe(el);
+});
+// ===== Haptic Feedback & Input Interactivity =====
+function triggerHaptic(duration = 10) {
+    if (navigator.vibrate) {
+        try { navigator.vibrate(duration); } catch(e) {}
+    }
+}
+const interactiveElements = document.querySelectorAll('.form-input, .form-select');
+interactiveElements.forEach(el => {
+    // Light haptic on focus for inputs
+    el.addEventListener('focus', () => triggerHaptic(10));
+    
+    // Tiny haptic blip on typing for inputs
+    if (el.tagName === 'INPUT') {
+        el.addEventListener('input', () => triggerHaptic(5));
+    }
+});
+const clickableElements = document.querySelectorAll('.submit-btn, .restart-btn, .hero-cta');
+clickableElements.forEach(el => {
+    // Stronger haptic on button clicks
+    el.addEventListener('click', () => triggerHaptic(20));
 });
