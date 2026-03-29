@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What NOT to Learn | Smart Career Strategy Engine</title>
+    <meta name="description" content="AI-powered career strategy engine that identifies low-value skills and recommends high-ROI alternatives based on industry trends and market demand.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🚫</span>
+                <span class="logo-text">What <span class="accent">NOT</span> to Learn</span>
+            </div>
+            <p class="tagline">Stop wasting time on dead-end skills. Get brutally honest career advice.</p>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-badge">⚡ AI-Powered Career Intelligence</div>
+            <h1 class="hero-title">
+                Don't learn <span class="hero-strike" id="rotatingSkill">jQuery</span><br>
+                Learn what <span class="accent">actually matters</span>.
+            </h1>
+            <p class="hero-subtitle">
+                Our engine analyzes industry trends, automation risks, and market demand to reveal 
+                which skills are wasting your time — and what to learn instead.
+            </p>
+            <a href="#engine" class="hero-cta" id="startBtn">
+                <span>Analyze My Path</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </section>
+        <!-- Stats Bar -->
+        <section class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number" data-target="847">0</span>
+                <span class="stat-label">Skills Analyzed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="92">0</span><span class="stat-suffix">%</span>
+                <span class="stat-label">Accuracy Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="12400">0</span>
+                <span class="stat-label">Hours Saved</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="6">0</span>
+                <span class="stat-label">Industry Sectors</span>
+            </div>
+        </section>
+        <!-- Engine Section -->
+        <section class="engine-section" id="engine">
+            <div class="section-header">
+                <h2 class="section-title">Configure Your Analysis</h2>
+                <p class="section-desc">Tell us about your goals and we'll identify what NOT to waste time on.</p>
+            </div>
+            <form class="engine-form" id="engineForm">
+                <div class="form-grid">
+                    <!-- Goal -->
+                    <div class="form-group full-width">
+                        <label for="userGoal" class="form-label">
+                            <span class="label-icon">🎯</span> Career Goal
+                        </label>
+                        <input type="text" id="userGoal" class="form-input" 
+                               placeholder="e.g., Become a full-stack developer in 6 months" required>
+                        <span class="form-hint">Be specific — include timeline if possible</span>
+                    </div>
+                    <!-- Current Skills -->
+                    <div class="form-group full-width">
+                        <label for="currentSkills" class="form-label">
+                            <span class="label-icon">🧠</span> Current Skills
+                        </label>
+                        <input type="text" id="currentSkills" class="form-input" 
+                               placeholder="e.g., Python, HTML, CSS, Basic JavaScript" required>
+                        <span class="form-hint">Comma-separated list of your existing skills</span>
+                    </div>
+                    <!-- Industry -->
+                    <div class="form-group">
+                        <label for="industry" class="form-label">
+                            <span class="label-icon">🏢</span> Target Industry
+                        </label>
+                        <select id="industry" class="form-select" required>
+                            <option value="">Select industry...</option>
+                            <option value="web-dev">Web Development</option>
+                            <option value="mobile-dev">Mobile Development</option>
+                            <option value="data-science">Data Science & AI/ML</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="devops">DevOps & Cloud</option>
+                            <option value="game-dev">Game Development</option>
+                            <option value="ui-ux">UI/UX Design</option>
+                            <option value="blockchain">Blockchain & Web3</option>
+                        </select>
+                    </div>
+                    <!-- Experience Level -->
+                    <div class="form-group">
+                        <label for="experience" class="form-label">
+                            <span class="label-icon">📊</span> Experience Level
+                        </label>
+                        <select id="experience" class="form-select" required>
+                            <option value="">Select level...</option>
+                            <option value="beginner">Beginner (0-1 years)</option>
+                            <option value="intermediate">Intermediate (1-3 years)</option>
+                            <option value="advanced">Advanced (3+ years)</option>
+                            <option value="career-switch">Career Switcher</option>
+                        </select>
+                    </div>
+                    <!-- Time Available -->
+                    <div class="form-group">
+                        <label for="timeAvailable" class="form-label">
+                            <span class="label-icon">⏱️</span> Daily Time Available
+                        </label>
+                        <select id="timeAvailable" class="form-select" required>
+                            <option value="">Select time...</option>
+                            <option value="1">1 hour/day</option>
+                            <option value="2">2 hours/day</option>
+                            <option value="3">3-4 hours/day</option>
+                            <option value="5">5+ hours/day</option>
+                            <option value="full">Full-time learner</option>
+                        </select>
+                    </div>
+                    <!-- Priority -->
+                    <div class="form-group">
+                        <label for="priority" class="form-label">
+                            <span class="label-icon">🔥</span> Learning Priority
+                        </label>
+                        <select id="priority" class="form-select" required>
+                            <option value="">Select priority...</option>
+                            <option value="job">Get hired ASAP</option>
+                            <option value="freelance">Freelance / Side income</option>
+                            <option value="deep">Deep expertise</option>
+                            <option value="startup">Build a startup</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" id="analyzeBtn">
+                    <span class="btn-text">🔍 Analyze My Path</span>
+                    <span class="btn-loader" id="btnLoader">
+                        <span class="loader-dot"></span>
+                        <span class="loader-dot"></span>
+                        <span class="loader-dot"></span>
+                    </span>
+                </button>
+            </form>
+        </section>
+        <!-- Results Section -->
+        <section class="results-section" id="results" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="pulse-dot"></span> Analysis Complete
+                </h2>
+                <p class="section-desc" id="resultsSummary"></p>
+            </div>
+            <!-- Summary Cards -->
+            <div class="summary-row" id="summaryRow">
+                <div class="summary-card summary-avoid">
+                    <span class="summary-icon">🚫</span>
+                    <span class="summary-num" id="avoidCount">0</span>
+                    <span class="summary-label">Skills to Avoid</span>
+                </div>
+                <div class="summary-card summary-time">
+                    <span class="summary-icon">⏱️</span>
+                    <span class="summary-num" id="timeSaved">0h</span>
+                    <span class="summary-label">Time Saved</span>
+                </div>
+                <div class="summary-card summary-alt">
+                    <span class="summary-icon">🚀</span>
+                    <span class="summary-num" id="altCount">0</span>
+                    <span class="summary-label">Better Alternatives</span>
+                </div>
+            </div>
+            <!-- Result Cards Container -->
+            <div class="results-grid" id="resultsGrid"></div>
+            <!-- Pro Tips -->
+            <div class="pro-tips" id="proTips"></div>
+            <!-- Restart -->
+            <button class="restart-btn" id="restartBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+                Run Another Analysis
+            </button>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Built with 🧠 intelligence — Powered by real-world market data & industry analysis</p>
+        <p class="footer-sub">© 2026 What NOT to Learn Engine. Make every learning hour count.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
